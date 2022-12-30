@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
+const UsersController = require("../controllers/users.controllers");
+const usersController = new UsersController();
+
 // 고객 회원가입 API
-router.post("/customer/signup");
+router.post("/customer/signup", usersController.customerRegister);
 
 // 업체 회원가입 API
 router.post("/business/singup");
