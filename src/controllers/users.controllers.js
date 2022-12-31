@@ -14,11 +14,13 @@ class UsersController {
       password,
       confirm
     );
-    const emailCheck = await this.usersVerifi.checkEmail(email);
 
     if (passwordCheck === false) {
       return res.status(412).json({ errorMessage: "Password를 확인해주세요." });
     }
+
+    const emailCheck = await this.usersVerifi.checkEmail(email);
+
     if (emailCheck === false) {
       return res.status(412).json({ errorMessage: "email 형식이 올바르지 않습니다." });
     }
@@ -31,7 +33,13 @@ class UsersController {
       nickname,
       phone
     );
-    return res.status(201).json({ data: createCostomerData });
+
+    if (!createCostomerData) {
+      return res.status(409).json({ errorMessage : "존재하는 Email입니다." })
+    } else if (createCostomerData.errorMessage) {
+      res.status(500).json({ errorMessage : createCostomerData.errorMessage })
+    }
+    return res.status(201).json({ data: createCostomerData }); 
   };
 
   businessRegister = async (req, res, next) => {
@@ -42,11 +50,11 @@ class UsersController {
       password,
       confirm
     );
-    const emailCheck = await this.usersVerifi.checkEmail(email);
-
     if (passwordCheck === false) {
       return res.status(412).json({ errorMessage: "Password를 확인해주세요." });
     }
+
+    const emailCheck = await this.usersVerifi.checkEmail(email);
     if (emailCheck === false) {
       return res.status(412).json({ errorMessage: "email 형식이 올바르지 않습니다." });
     }
@@ -59,7 +67,13 @@ class UsersController {
       companyName,
       phone
     );
-    return res.status(201).json({ data: createBusinessData });
+
+    if (!createBusinessData) {
+      return res.status(409).json({ errorMessage : "존재하는 Email입니다." })
+    } else if (createBusinessData.errorMessage) {
+      res.status(500).json({ errorMessage : createBusinessData.errorMessage })
+    }
+    return res.status(201).json({ data: createBusinessData }); 
   };
 }
 

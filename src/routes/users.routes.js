@@ -8,7 +8,7 @@ const usersController = new UsersController();
 router.post("/customer/signup", usersController.customerRegister);
 
 // 업체 회원가입 API
-router.post("/business/singup", usersController.businessRegister);
+router.post("/business/signup", usersController.businessRegister);
 
 // 로그인 API
 router.post("/auth");

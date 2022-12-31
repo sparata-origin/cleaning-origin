@@ -22,6 +22,18 @@ class UsersRepository {
     return createUserData;
   };
 
+  existCustomerUser = async (email) => {
+    const existUser = await Customers.findOne({ where : {email}})
+
+    return existUser
+  }
+
+  existBusinessUser = async (email) => {
+    const existUser = await Business.findOne({ where : {email}})
+
+    return existUser
+  }
+
 
 }
 
