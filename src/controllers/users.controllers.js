@@ -1,9 +1,11 @@
 const UsersService = require("../services/users.service");
+const UsersVerifi = require("../module/users.verifi.module")
 
 
 // Users의 컨트롤러(Controller)역할을 하는 클래스
 class UsersController {
   usersService = new UsersService();
+  usersVerifi = new UsersVerifi();
 
   customerRegister = async (req, res, next) => {
     const { email, nickname, confirm, phone } = req.body;
@@ -12,7 +14,7 @@ class UsersController {
       return res.status(412).json({ errorMessage: "Password를 확인해주세요." });
     }
 
-    password = await this.usersService.passwordEncryption(password)
+    password = await this.usersVerifi.passwordEncryption(password)
 
     const createCostomerData = await this.usersService.customerRegister(
       email,
@@ -30,7 +32,7 @@ class UsersController {
       return res.status(412).json({ errorMessage: "Password를 확인해주세요." });
     }
 
-    password = await this.usersService.passwordEncryption(password)
+    password = await this.usersVerifi.passwordEncryption(password)
 
     const createBusinessData = await this.usersService.businessRegister(
       email,
