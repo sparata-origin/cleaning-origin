@@ -9,12 +9,8 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Services extends Model {
         static associate(models) {
-            models.Services.belongsTo(models.Customers, {
-                foreignKey: 'customerId',
-                targetKey: 'id',
-            });
-            models.Services.belongsTo(models.Business, {
-                foreignKey: 'businessId',
+            models.Services.belongsTo(models.Users, {
+                foreignKey: 'userId',
                 targetKey: 'id',
             });
             models.Services.hasOne(models.Reviews, {});

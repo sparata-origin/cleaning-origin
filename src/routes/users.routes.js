@@ -1,20 +1,22 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-// 고객 회원가입 API
-router.post("/customer/signup");
+const UsersController = require('../controllers/users.controllers');
+const authMiddleware = require('../middleware/auth.middleware');
+const usersController = new UsersController();
 
-// 업체 회원가입 API
-router.post("/business/singup");
+// 회원가입
+router.post('/auth/signup', usersController.userRegister);
 
 // 로그인 API
-router.post("/auth");
+router.post('/auth/login', usersController.login);
 
 // 로그아웃 API
-router.post("/logout")
+router.get('/auth/logout', usersController.logout);
 
+// 로그인 검증 test
+router.get('/auth/test', authMiddleware, async (req, res) => {
+    res.json({ user: res.locals.user });
+});
 
 module.exports = router;
-
-// 예시
-// router.post("/customer/singup", costomerController.createCostomer); 

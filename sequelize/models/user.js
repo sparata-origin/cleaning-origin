@@ -7,24 +7,25 @@ const { Model } = require('sequelize');
  * @return {Model} - Sequelize Model
  * **/
 module.exports = (sequelize, DataTypes) => {
-    class Customers extends Model {
+    class Users extends Model {
         static associate(models) {
-            models.Customers.hasMany(models.Services, {
-                foreignKey: 'customerId',
+            models.Users.hasMany(models.Services, {
+                foreignKey: 'userId',
                 sourceKey: 'id',
             });
-            models.Customers.hasMany(models.Reviews, {
-                foreignKey: 'customerId',
+            models.Users.hasMany(models.Reviews, {
+                foreignKey: 'userId',
                 sourceKey: 'id',
             });
         }
     }
 
-    Customers.init(
+    Users.init(
         {
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
             },
             password: {
                 type: DataTypes.STRING,
@@ -43,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            isBusiness: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+            },
             createdAt: {
                 allowNull: false,
                 type: DataTypes.DATE,
@@ -56,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'Customers',
+            modelName: 'Users',
         }
     );
-    return Customers;
+    return Users;
 };
