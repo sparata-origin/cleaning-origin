@@ -1,40 +1,35 @@
-const { Customers , Business } = require("../../sequelize/models");
+const { Users } = require('../../sequelize/models');
 
 class UsersRepository {
+    userRegister = async (email, password, nickname, phone, isBusiness) => {
+        if (isBusiness) {
+            const createUserData = await Users.create({
+                email,
+                password,
+                nickname,
+                phone,
+                point: 0,
+                isBusiness,
+            });
+            return createUserData;
+        } else {
+            const createUserData = await Users.create({
+                email,
+                password,
+                nickname,
+                phone,
+                point: 500,
+                isBusiness,
+            });
+            return createUserData;
+        }
+    };
 
-  customerRegister = async (email, password, nickname, phone) => {
-    const createUserData = await Customers.create({
-      email,
-      password,
-      nickname,
-      phone,
-    });
-    return createUserData;
-  };
+    existUser = async (email) => {
+        const existUser = await Users.findOne({ where: { email } });
 
-  businessRegister = async (email, password, companyName, phone) => {
-    const createUserData = await Business.create({
-      email,
-      password,
-      companyName,
-      phone,
-    });
-    return createUserData;
-  };
-
-  existCustomerUser = async (email) => {
-    const existUser = await Customers.findOne({ where : {email}})
-
-    return existUser
-  }
-
-  existBusinessUser = async (email) => {
-    const existUser = await Business.findOne({ where : {email}})
-
-    return existUser
-  }
-
-
+        return existUser;
+    };
 }
 
 module.exports = UsersRepository;
