@@ -1,12 +1,10 @@
 const bcrypt = require("bcrypt");
 
 class UsersVerifi {
-
   checkPassword = async (password, confirmPasswrod) => {
     if (password !== confirmPasswrod) {
       return false;
     }
-
     return true;
   };
 
