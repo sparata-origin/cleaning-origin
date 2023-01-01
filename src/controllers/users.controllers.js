@@ -1,9 +1,5 @@
 const UsersService = require('../services/users.service');
 const UsersVerify = require('../module/users.verify.module');
-const jwt = require('jsonwebtoken');
-const { jwtConfig } = require('../../config/config');
-require('dotenv').config();
-const env = process.env;
 
 // Users의 컨트롤러(Controller)역할을 하는 클래스
 class UsersController {
@@ -80,7 +76,6 @@ class UsersController {
     logout = async (req, res, next) => {
         try {
             res.clearCookie('user').end();
-            console.log(res.cookie.user);
         } catch (err) {
             console.log(err);
         }

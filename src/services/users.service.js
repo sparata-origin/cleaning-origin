@@ -41,6 +41,7 @@ class UsersService {
                 const payload = {
                     userId: user.id,
                     nickname: user.nickname,
+                    isBusiness: user.isBusiness,
                 };
                 const token = jwt.sign(
                     payload,
