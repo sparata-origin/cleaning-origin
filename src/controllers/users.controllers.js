@@ -1,80 +1,102 @@
-const UsersService = require("../services/users.service");
-const UsersVerifi = require("../module/users.verifi.module");
+const UsersService = require('../services/users.service');
+const UsersVerifi = require('../module/users.verifi.module');
+const jwt = require('jsonwebtoken');
+const { jwtConfig } = require('../../config/config');
+require('dotenv').config();
+const env = process.env;
 
 // Users의 컨트롤러(Controller)역할을 하는 클래스
 class UsersController {
-  usersService = new UsersService();
-  usersVerifi = new UsersVerifi();
+    usersService = new UsersService();
+    usersVerifi = new UsersVerifi();
 
-  customerRegister = async (req, res, next) => {
-    const { email, nickname, confirm, phone } = req.body;
-    let { password } = req.body;
+    userRegister = async (req, res, next) => {
+        try {
+            const { email, nickname, confirm, phone, isBusiness } = req.body;
+            let { password } = req.body;
 
-    const passwordCheck = await this.usersVerifi.checkPassword(
-      password,
-      confirm
-    );
+            const passwordCheck = await this.usersVerifi.checkPassword(
+                password,
+                confirm
+            );
 
-    if (passwordCheck === false) {
-      return res.status(412).json({ errorMessage: "Password를 확인해주세요." });
-    }
+            if (passwordCheck === false) {
+                return res
+                    .status(412)
+                    .json({ errorMessage: 'Password를 확인해주세요.' });
+            }
 
-    const emailCheck = await this.usersVerifi.checkEmail(email);
+            const emailCheck = await this.usersVerifi.checkEmail(email);
 
-    if (emailCheck === false) {
-      return res.status(412).json({ errorMessage: "email 형식이 올바르지 않습니다." });
-    }
+            if (emailCheck === false) {
+                return res
+                    .status(412)
+                    .json({ errorMessage: 'email 형식이 올바르지 않습니다.' });
+            }
 
-    password = await this.usersVerifi.passwordEncryption(password);
+            password = await this.usersVerifi.passwordEncryption(password);
 
-    const createCostomerData = await this.usersService.customerRegister(
-      email,
-      password,
-      nickname,
-      phone
-    );
+            const createUserData = await this.usersService.userRegister(
+                email,
+                password,
+                nickname,
+                phone,
+                isBusiness
+            );
 
-    if (!createCostomerData) {
-      return res.status(409).json({ errorMessage : "존재하는 Email입니다." })
-    } else if (createCostomerData.errorMessage) {
-      res.status(500).json({ errorMessage : createCostomerData.errorMessage })
-    }
-    return res.status(201).json({ data: createCostomerData }); 
-  };
+            if (!createUserData) {
+                return res
+                    .status(409)
+                    .json({ errorMessage: '존재하는 Email입니다.' });
+            } else if (createUserData.errorMessage) {
+                return res.status(500).json({
+                    errorMessage: createUserData.errorMessage,
+                });
+            }
+            return res.status(201).json({ data: createUserData });
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
-  businessRegister = async (req, res, next) => {
-    const { email, nickname: companyName, confirm, phone } = req.body;
-    let { password } = req.body;
-
-    const passwordCheck = await this.usersVerifi.checkPassword(
-      password,
-      confirm
-    );
-    if (passwordCheck === false) {
-      return res.status(412).json({ errorMessage: "Password를 확인해주세요." });
-    }
-
-    const emailCheck = await this.usersVerifi.checkEmail(email);
-    if (emailCheck === false) {
-      return res.status(412).json({ errorMessage: "email 형식이 올바르지 않습니다." });
-    }
-
-    password = await this.usersVerifi.passwordEncryption(password);
-
-    const createBusinessData = await this.usersService.businessRegister(
-      email,
-      password,
-      companyName,
-      phone
-    );
-
-    if (!createBusinessData) {
-      return res.status(409).json({ errorMessage : "존재하는 Email입니다." })
-    } else if (createBusinessData.errorMessage) {
-      res.status(500).json({ errorMessage : createBusinessData.errorMessage })
-    }
-    return res.status(201).json({ data: createBusinessData }); 
-  };
+    login = async (req, res, next) => {
+        try {
+            const { email, password } = req.body;
+            const user = await this.usersService.login(email, password);
+            const payload = {
+                userId: user.id,
+                nickname: user.nickname,
+            };
+            if (user) {
+                const token = jwt.sign(
+                    payload,
+                    jwtConfig.secretKey,
+                    jwtConfig.option
+                );
+                res.cookie('user', token, {
+                    maxAge: 1000 * 60 * 60 * 24 * 7, // 7days
+                    httpOnly: true,
+                });
+                res.status(201).json({
+                    message: '로그인 완료',
+                    token,
+                    payload,
+                });
+            } else {
+                res.status(400).json({ errorMessage: 'Invaild User' });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    logout = async (req, res, next) => {
+        try {
+            res.clearCookie('user').end();
+            console.log(res.cookie.user);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 }
 
 module.exports = UsersController;
