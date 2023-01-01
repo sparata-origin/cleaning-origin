@@ -1,9 +1,11 @@
 const UsersRepository = require('../repository/users.repository');
-const UsersVerifi = require('../module/users.verifi.module');
+const UsersVerify = require('../module/users.verify.module');
+const jwt = require('jsonwebtoken');
+const { jwtConfig } = require('../../config/config');
 
 class UsersService {
     usersRepository = new UsersRepository();
-    usersVerifi = new UsersVerifi();
+    usersVerify = new UsersVerify();
 
     userRegister = async (email, password, nickname, phone, isBusiness) => {
         try {
@@ -27,9 +29,28 @@ class UsersService {
         }
     };
 
-    login = async (email, password, isBusiness) => {
+    login = async (email, password) => {
         try {
-            return await this.usersRepository.existUser(email);
+            const user = await this.usersRepository.existUser(email);
+            const passwordValid = await this.usersVerify.passwordVerify(
+                password,
+                user.password
+            );
+
+            if (user && passwordValid) {
+                const payload = {
+                    userId: user.id,
+                    nickname: user.nickname,
+                };
+                const token = jwt.sign(
+                    payload,
+                    jwtConfig.secretKey,
+                    jwtConfig.option
+                );
+                return token;
+            } else {
+                return { errorMessage: '비밀번호가 일치하지 않습니다' };
+            }
         } catch (err) {
             console.log(err);
         }

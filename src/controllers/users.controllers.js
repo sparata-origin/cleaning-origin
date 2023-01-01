@@ -1,5 +1,5 @@
 const UsersService = require('../services/users.service');
-const UsersVerifi = require('../module/users.verifi.module');
+const UsersVerify = require('../module/users.verify.module');
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../../config/config');
 require('dotenv').config();
@@ -8,14 +8,14 @@ const env = process.env;
 // Users의 컨트롤러(Controller)역할을 하는 클래스
 class UsersController {
     usersService = new UsersService();
-    usersVerifi = new UsersVerifi();
+    usersVerify = new UsersVerify();
 
     userRegister = async (req, res, next) => {
         try {
             const { email, nickname, confirm, phone, isBusiness } = req.body;
             let { password } = req.body;
 
-            const passwordCheck = await this.usersVerifi.checkPassword(
+            const passwordCheck = await this.usersVerify.checkPassword(
                 password,
                 confirm
             );
@@ -26,7 +26,7 @@ class UsersController {
                     .json({ errorMessage: 'Password를 확인해주세요.' });
             }
 
-            const emailCheck = await this.usersVerifi.checkEmail(email);
+            const emailCheck = await this.usersVerify.checkEmail(email);
 
             if (emailCheck === false) {
                 return res
@@ -34,7 +34,7 @@ class UsersController {
                     .json({ errorMessage: 'email 형식이 올바르지 않습니다.' });
             }
 
-            password = await this.usersVerifi.passwordEncryption(password);
+            password = await this.usersVerify.passwordEncryption(password);
 
             const createUserData = await this.usersService.userRegister(
                 email,
@@ -62,17 +62,8 @@ class UsersController {
     login = async (req, res, next) => {
         try {
             const { email, password } = req.body;
-            const user = await this.usersService.login(email, password);
-            const payload = {
-                userId: user.id,
-                nickname: user.nickname,
-            };
-            if (user) {
-                const token = jwt.sign(
-                    payload,
-                    jwtConfig.secretKey,
-                    jwtConfig.option
-                );
+            const token = await this.usersService.login(email, password);
+            if (token) {
                 res.cookie('user', token, {
                     maxAge: 1000 * 60 * 60 * 24 * 7, // 7days
                     httpOnly: true,
@@ -80,10 +71,7 @@ class UsersController {
                 res.status(201).json({
                     message: '로그인 완료',
                     token,
-                    payload,
                 });
-            } else {
-                res.status(400).json({ errorMessage: 'Invaild User' });
             }
         } catch (err) {
             console.log(err);
