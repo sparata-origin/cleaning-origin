@@ -10,6 +10,13 @@ class StatusRepository {
     return customerStatusData
   };
 
+  buisnessStatus = async (userId) => {
+    const buisnessStatusData = await Services.findAll({
+      where : { businessId : userId }
+    })
+    return buisnessStatusData
+  }
+
   existStatus = async (serviceId) => {
     const existStatusData = await Services.findOne({
       where : { id : serviceId },

@@ -3,11 +3,17 @@ const StatusRepository = require('../repository/mystatus.repository');
 class StatusService {
     statusRepository = new StatusRepository();
     
-    customerStatus = async (userId) => {
+    myStatus = async (userId, isBusiness) => {
       try{
-        const customerStatusData = await this.statusRepository.customerStatus(userId)
+        if (isBusiness) {
+          const myStatusData = await this.statusRepository.buisnessStatus(userId)
 
-        return customerStatusData
+          return myStatusData
+        }
+
+        const myStatusData = await this.statusRepository.customerStatus(userId)
+
+        return myStatusData
       } catch {
         return false
       }
