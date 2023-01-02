@@ -1,13 +1,44 @@
+const ServicesRepository = require("../");
+const { Services: ServicesModel } = require("../../sequelize/models");
+
 class ServicesService {
-  requestServices = async () => {};
+  servicesRepository = new ServicesRepository(ServicesModel);
 
-  putServices = async () => {};
+  requestServices = async (userId, address, homeImage) => {
+    const createServiceData = await this.servicesRepository.create({
+      userId,
+      address,
+      homeImage,
+    });
+    return createServiceData;
+  };
 
-  deleteServices = async () => {};
+  putServices = async (serviceId, customerId, address, homeImage) => {
+    const updated = await this.servicesRepository.update(serviceId, {
+      address,
+      homeImage,
+      customerId,
+    });
+    return updated;
+  };
 
-  getServicesList = async () => {};
+  deleteServices = async (serviceId, customerId) => {
+    const service = await this.servicesRepository.findById(serviceId);
+    if (service.customerId !== customerId) {
+      return 0;
+    }
+    await this.servicesRepository.destroy(serviceId);
+  };
 
-  getServicesDetail = async () => {};
+  getServicesList = async () => {
+    const services = await this.servicesRepository.findAll();
+    return services;
+  };
+
+  getServicesDetail = async (serviceId) => {
+    const service = await this.servicesRepository.findById(serviceId);
+    return service;
+  };
 }
 
 module.exports = ServicesService;

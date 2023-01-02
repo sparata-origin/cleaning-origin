@@ -13,7 +13,12 @@ class ServicesRepository {
     return service;
   };
 
-  create = async () => {
+  findOne = async (findoption) => {
+    const service = await this.servicesModel.findOne(findoption);
+    return service;
+  }
+
+  create = async (userId, address, homeImage) => {
     const created = await this.servicesModel.create();
     return created;
   };
