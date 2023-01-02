@@ -16,7 +16,7 @@ class UsersController {
                 confirm
             );
 
-            if (passwordCheck === false) {
+            if (!passwordCheck) {
                 return res
                     .status(412)
                     .json({ errorMessage: 'Password를 확인해주세요.' });
@@ -24,7 +24,7 @@ class UsersController {
 
             const emailCheck = await this.usersVerify.checkEmail(email);
 
-            if (emailCheck === false) {
+            if (!emailCheck) {
                 return res
                     .status(412)
                     .json({ errorMessage: 'email 형식이 올바르지 않습니다.' });
