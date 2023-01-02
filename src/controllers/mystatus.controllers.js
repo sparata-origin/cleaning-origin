@@ -17,6 +17,12 @@ class StatusController {
       }
       
     }
+
+    serviceStatusUpdate = async (req, res) => {
+      const serviceId = req.params;
+      
+      const seviceStatus = req.body;
+    }
 }
 
 module.exports = StatusController;

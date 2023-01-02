@@ -58,7 +58,15 @@ class UsersController {
     login = async (req, res, next) => {
         try {
             const { email, password } = req.body;
+            if (!email || !password) {
+                return res.status(412).json({ errorMessage :'Email이나 Password를 입력해주세요' })
+            }
+            
             const token = await this.usersService.login(email, password);
+            if (token.errorMessage) {
+                return res.status(500).json({errorMessage : token.errorMessage})
+            }
+
             if (token) {
                 res.cookie('user', token, {
                     maxAge: 1000 * 60 * 60 * 24 * 7, // 7days
@@ -70,7 +78,7 @@ class UsersController {
                 });
             }
         } catch (err) {
-            console.log(err);
+            res.status(500).json({errorMessage : '예상하지 못한 문제가 발생했습니다.' });
         }
     };
     logout = async (req, res, next) => {
