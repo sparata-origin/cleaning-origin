@@ -10,10 +10,19 @@ module.exports = (sequelize, DataTypes) => {
     class Services extends Model {
         static associate(models) {
             models.Services.belongsTo(models.Users, {
-                foreignKey: 'userId',
+                foreignKey: { name: 'customerId', allowNull: false },
+                targetKey: 'id',
+                allowNull: false,
+            });
+            models.Services.belongsTo(models.Users, {
+                foreignKey: { name: 'businessId', allowNull: true },
+                targetKey: 'id',
+                allowNull: true,
+            });
+            models.Services.hasOne(models.Reviews, {
+                foreignKey: { name: 'serviceId', allowNull: false },
                 targetKey: 'id',
             });
-            models.Services.hasOne(models.Reviews, {});
         }
     }
 

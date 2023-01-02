@@ -10,10 +10,19 @@ module.exports = (sequelize, DataTypes) => {
     class Reviews extends Model {
         static associate(models) {
             models.Reviews.belongsTo(models.Users, {
-                foreignKey: 'userId',
+                foreignKey: { name: 'customerId', allowNull: false },
+                targetKey: 'id',
+                allowNull: false,
+            });
+            models.Reviews.belongsTo(models.Users, {
+                foreignKey: { name: 'businessId', allowNull: false },
+                targetKey: 'id',
+                allowNull: false,
+            });
+            models.Reviews.belongsTo(models.Services, {
+                foreignKey: { name: 'serviceId', allowNull: false },
                 targetKey: 'id',
             });
-            models.Reviews.belongsTo(models.Services, {});
         }
     }
 
