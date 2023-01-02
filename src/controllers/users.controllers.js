@@ -51,7 +51,9 @@ class UsersController {
             }
             return res.status(201).json({ data: createUserData });
         } catch (err) {
-            return res.stauts(500).json({ errorMessage: '예상하지 못한 문제가 발생했습니다.' });
+            return res
+                .stauts(500)
+                .json({ errorMessage: '예상하지 못한 문제가 발생했습니다.' });
         }
     };
 
@@ -59,12 +61,16 @@ class UsersController {
         try {
             const { email, password } = req.body;
             if (!email || !password) {
-                return res.status(412).json({ errorMessage :'Email이나 Password를 입력해주세요' })
+                return res.status(412).json({
+                    errorMessage: 'Email이나 Password를 입력해주세요',
+                });
             }
 
             const token = await this.usersService.login(email, password);
             if (token.errorMessage) {
-                return res.status(500).json({errorMessage : token.errorMessage})
+                return res
+                    .status(500)
+                    .json({ errorMessage: token.errorMessage });
             }
 
             if (token) {
@@ -78,7 +84,9 @@ class UsersController {
                 });
             }
         } catch (err) {
-            res.status(500).json({errorMessage : '예상하지 못한 문제가 발생했습니다.' });
+            res.status(500).json({
+                errorMessage: '예상하지 못한 문제가 발생했습니다.',
+            });
         }
     };
     logout = async (req, res, next) => {
