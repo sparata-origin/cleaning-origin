@@ -5,6 +5,16 @@ class ReviewController {
     writeReview = async (req, res, next) => {
         try {
             const { content, star } = req.body;
+            if (!content) {
+                return res.status(412).json({
+                    errorMessage: '내용을 입력해주세요',
+                });
+            }
+            if (!star) {
+                return res.status(412).json({
+                    errorMessage: '별점을 입력해주세요',
+                });
+            }
             const { serviceId, businessId } = req.params;
             const customerId = res.locals.user.id;
             const writeReviewData = await this.reviewsService.writeReview(
