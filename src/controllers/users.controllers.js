@@ -45,7 +45,7 @@ class UsersController {
                     .status(409)
                     .json({ errorMessage: '존재하는 Email입니다.' });
             } else if (createUserData.errorMessage) {
-                return res.status(500).json({
+                return res.status(412).json({
                     errorMessage: createUserData.errorMessage,
                 });
             }
@@ -61,7 +61,7 @@ class UsersController {
             if (!email || !password) {
                 return res.status(412).json({ errorMessage :'Email이나 Password를 입력해주세요' })
             }
-            
+
             const token = await this.usersService.login(email, password);
             if (token.errorMessage) {
                 return res.status(500).json({errorMessage : token.errorMessage})
