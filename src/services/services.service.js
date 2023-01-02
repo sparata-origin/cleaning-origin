@@ -1,4 +1,4 @@
-const ServicesRepository = require("../");
+const ServicesRepository = require("../repository/services.repository");
 const { Services: ServicesModel } = require("../../sequelize/models");
 
 class ServicesService {
