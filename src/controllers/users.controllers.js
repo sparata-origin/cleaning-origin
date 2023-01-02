@@ -51,7 +51,7 @@ class UsersController {
             }
             return res.status(201).json({ data: createUserData });
         } catch (err) {
-            console.log(err);
+            return res.stauts(500).json({ errorMessage: '예상하지 못한 문제가 발생했습니다.' });
         }
     };
 
