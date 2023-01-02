@@ -35,6 +35,7 @@ class ReviewRepository {
                 model: Users,
                 attributes: ['nickname'],
             },
+            raw: true,
         });
         return reviews;
     };
