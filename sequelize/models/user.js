@@ -10,12 +10,23 @@ module.exports = (sequelize, DataTypes) => {
     class Users extends Model {
         static associate(models) {
             models.Users.hasMany(models.Services, {
-                foreignKey: 'userId',
+                foreignKey: { name: 'customerId', allowNull: false },
                 sourceKey: 'id',
             });
-            models.Users.hasMany(models.Reviews, {
-                foreignKey: 'userId',
+            models.Users.hasMany(models.Services, {
+                foreignKey: { name: 'businessId', allowNull: true },
                 sourceKey: 'id',
+                allowNull: true,
+            });
+            models.Users.hasMany(models.Reviews, {
+                foreignKey: { name: 'customerId', allowNull: false },
+                sourceKey: 'id',
+                allowNull: false,
+            });
+            models.Users.hasMany(models.Reviews, {
+                foreignKey: { name: 'businessId', allowNull: false },
+                sourceKey: 'id',
+                allowNull: false,
             });
         }
     }
@@ -48,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
             },
+
             createdAt: {
                 allowNull: false,
                 type: DataTypes.DATE,
