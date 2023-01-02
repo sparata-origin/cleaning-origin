@@ -85,7 +85,7 @@ class ServicesController {
       const serviceId = +req.params.serviceId;
       const data = await this.servicesService.getServicesDetail(serviceId);
       if (!data) {
-        res.status(404).json({
+        return res.status(404).json({
           errorMessage: '해당하는 서비스가 없습니다.'
         })
       }
