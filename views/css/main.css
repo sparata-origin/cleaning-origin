@@ -151,6 +151,9 @@ a#scrollUp i{
 .header-middle .container .row .col-sm-8 {
 	padding-right:0;
 }
+.container {
+  margin-top: 10px;
+}
 
 .usa {
   border-radius: 0;
