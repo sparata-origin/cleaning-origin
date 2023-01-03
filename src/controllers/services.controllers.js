@@ -6,7 +6,7 @@ class ServicesController {
   requestServices = async (req, res, next) => {
     try {
       const { address, homeImage } = req.body;
-      const { userId, nickName, isBusiness } = res.locals.user;
+      const { id: userId, nickName, isBusiness } = res.locals.user;
       if (isBusiness) {
         return res.status(403).json({
           errorMessage: "고객만이 가능한 요청입니다.",
@@ -27,7 +27,7 @@ class ServicesController {
     try {
       const serviceId = +req.params.serviceId;
       const { address, homeImage } = req.body;
-      const { userId, nickName, isBusiness } = res.locals.user;
+      const { id: userId, nickName, isBusiness } = res.locals.user;
       if (isBusiness) {
         return res.status(403).json({
           errorMessage: "고객만이 가능한 요청입니다.",
@@ -52,7 +52,7 @@ class ServicesController {
   deleteServices = async (req, res, next) => {
     try {
       const serviceId = +req.params.serviceId;
-      const { userId, nickName, isBusiness } = res.locals.user;
+      const { id: userId, nickName, isBusiness } = res.locals.user;
       if (isBusiness) {
         return res.status(403).json({
           errorMessage: "고객만이 가능한 요청입니다.",
