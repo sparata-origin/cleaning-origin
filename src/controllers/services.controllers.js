@@ -5,7 +5,8 @@ class ServicesController {
 
     requestServices = async (req, res, next) => {
         try {
-            const { address, homeImage } = req.body;
+            const { address } = req.body;
+            const homeImage = req.file.filename;
             const customerId = res.locals.user.id;
             const isBusiness = res.locals.user.isBusiness;
             if (isBusiness) {
@@ -41,7 +42,8 @@ class ServicesController {
     putServices = async (req, res, next) => {
         try {
             const { serviceId } = req.params;
-            const { address, homeImage } = req.body;
+            const { address } = req.body;
+            const homeImage = req.file.filename;
             const customerId = res.locals.user.id;
             const isBusiness = res.locals.user.isBusiness;
             if (isBusiness) {
