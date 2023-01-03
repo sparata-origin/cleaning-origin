@@ -11,7 +11,6 @@ class UsersController {
             const { email, nickname, confirm, phone, isBusiness } = req.body;
             let { password } = req.body;
 
-            console.log(req.body)
 
             const passwordCheck = await this.usersVerify.checkPassword(
                 password,
@@ -91,7 +90,6 @@ class UsersController {
         }
     };
     logout = async (req, res, next) => {
-        console.log("dsadasdsa")
         try {
             res.clearCookie('user').end();
         } catch (err) {

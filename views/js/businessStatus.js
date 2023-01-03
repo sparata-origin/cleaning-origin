@@ -9,7 +9,7 @@ function showStatusList() {
     data: {},
     success: function (response) {
       let rows = response.myStatusData
-      console.log(response.myStatusData)
+    
       for(let i = 0; i < rows.length; i++){
         let id = rows[i]['id']
         let status = rows[i]['status']

@@ -17,7 +17,6 @@ router.get('/index', logincheck, (req, res) => {
 })
 
 router.get('/status', logincheck, (req, res) => {
-  console.log(res.locals.user.isBusiness)
   if (res.locals.user.isBusiness){
     res.render('businessstatus.ejs')
   } else if (res.locals.user.isBusiness === false) {

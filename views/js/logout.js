@@ -1,5 +1,5 @@
 function logout() {
-  console.log("오긴하냐?")
+
   $.ajax({
     type: 'GET',
     url: `/api/auth/logout`,

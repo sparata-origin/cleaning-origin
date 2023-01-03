@@ -44,7 +44,7 @@ class ReviewService {
                 return { errorMessage: '리뷰가 존재하지 않습니다' };
             }
             return allReview.map((review) => {
-                console.log(review);
+    
                 return {
                     // id: review.id,
                     content: review.content,
