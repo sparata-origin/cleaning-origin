@@ -12,7 +12,10 @@ class ReviewService {
                 return { errorMessage: '해당하는 서비스가 없습니다' };
             }
             if (parseInt(customerId) !== existService.customerId) {
-                return { errorMessage: '해당 서비스에 접근할 수 없습니다' };
+                return {
+                    errorMessage:
+                        '해당 서비스 신청한 사람만 리뷰 작성 가능합니다',
+                };
             }
             if (parseInt(businessId) !== existService.businessId) {
                 return {
