@@ -9,9 +9,13 @@ function login() {
             email: email,
             password: password,
         },
-        success: function (json) {
-            alert(json.message);
+        success: function (response) {
+            alert(response.message);
             window.location.href = '/';
+        },
+        error: function (response) {
+            console.log(response);
+            alert(response.responseJSON.errorMessage);
         },
     });
 }
