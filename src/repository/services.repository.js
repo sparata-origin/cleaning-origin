@@ -19,7 +19,11 @@ class ServicesRepository {
   }
 
   createService = async (userId, address, homeImage) => {
-    const created = await this.servicesModel.create();
+    const created = await this.servicesModel.create({
+      address: 'test',
+      homeImage: 'test',
+      customerId: userId,
+    });
     return created;
   };
 
