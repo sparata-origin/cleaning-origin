@@ -5,7 +5,7 @@ $(document).ready(function () {
 function showStatusList() {
   $.ajax({
     type: 'GET',
-    url: `/api/mystatus/services`,
+    url: `/api//mystatus/services`,
     data: {},
     success: function (response) {
       let rows = response.myStatusData
@@ -16,7 +16,7 @@ function showStatusList() {
         let address = rows[i]['address']
         let homeImage = rows[i]['homeImage']
 
-        if (status === "청소 완료") {
+        if (status === "대기중" || status === "청소중") {
           let temp_html = `<tr>
                           <td class="cart_product">
                             <a href=""><img src="img/cleaning.jpg" alt=""></a>
@@ -37,7 +37,7 @@ function showStatusList() {
                         </tr>`
            $('#statusList').append(temp_html)
         }
-        if (status === "청소중") {
+        if (status === "청소완료") {
           let temp_html = `<tr>
                           <td class="cart_product">
                             <a href=""><img src="img/cleaning.jpg" alt=""></a>
@@ -54,7 +54,7 @@ function showStatusList() {
                             </div>
                           </td>
                           <td class="cart_total">
-                            <button type="button" class="btn btn-warning" onclick="receiveOrder(${id})">청소 완료</button>
+                            <button type="button" class="btn btn-warning" onclick="receiveOrder(${id})">리뷰 작성</button>
                           </td>
                         </tr>`
             $('#statusList').append(temp_html)

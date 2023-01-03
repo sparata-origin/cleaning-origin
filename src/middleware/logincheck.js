@@ -6,17 +6,16 @@ const env = process.env;
 module.exports = (req, res, next) => {
     const { cookie } = req.headers;
     if (!cookie) {
-        return res
-            .status(401)
-            .json({ errorMessage: '로그인 후 이용 가능합니다!' });
+        res.locals.user = false
+        next();
+        return
     }
     // authType: user , authToken: 토큰 값
     const [authType, authToken] = cookie.split('=');
     if (!authToken || authType !== 'user') {
-        res.status(401).send({
-            errorMessage: '로그인 후 이용 가능합니다!!',
-        });
-        return;
+        res.locals.user = false
+        next();
+        return
     }
     try {
         const { userId } = jwt.verify(authToken, env.JWT_SECRETKEY);
@@ -25,8 +24,7 @@ module.exports = (req, res, next) => {
             next();
         });
     } catch (err) {
-        res.status(401).json({
-            errorMessage: '로그인 후 이용 가능합니다!!!!!!!!!!',
-        });
+        res.locals.user = false
+        next();
     }
 };

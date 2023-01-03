@@ -1,16 +1,31 @@
 const express = require('express');
 const router = express.Router();
+const logincheck = require('../src/middleware/logincheck');
 
-router.get('/', (req, res) => {
-  res.render('index.ejs')
+router.get('/', logincheck, (req, res) => {
+  if(res.locals.user){
+    res.render('index.ejs',{ login : true})
+  }
+  res.render('index.ejs', {login : false})
 })
 
-router.get('/index', (req, res) => {
-  res.render('index.ejs')
+router.get('/index', logincheck, (req, res) => {
+  if(res.locals.user){
+    res.render('index.ejs',{ login : true })
+  }
+  res.render('index.ejs', {login : false})
 })
 
-router.get('/status', (req, res) => {
-  res.render('status.ejs')
+router.get('/status', logincheck, (req, res) => {
+  console.log(res.locals.user.isBusiness)
+  if (res.locals.user.isBusiness){
+    res.render('businessstatus.ejs')
+  } else if (res.locals.user.isBusiness === false) {
+    res.render('customerstatus.ejs')
+  } else {
+    res.render('404.ejs')
+  }
+  
 })
 
 router.get('/login', (req, res) => {

@@ -10,8 +10,9 @@ function login() {
             password: password,
         },
         success: function (response) {
+            console.log(response)
             alert(response.message);
-            window.location.href = '/';
+            window.location.href = '/index';
         },
         error: function (response) {
             console.log(response);

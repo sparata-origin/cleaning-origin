@@ -81,8 +81,7 @@ class UsersController {
                     httpOnly: true,
                 });
                 res.status(201).json({
-                    message: '로그인 완료',
-                    token,
+                    message: '로그인 완료'
                 });
             }
         } catch (err) {
@@ -92,6 +91,7 @@ class UsersController {
         }
     };
     logout = async (req, res, next) => {
+        console.log("dsadasdsa")
         try {
             res.clearCookie('user').end();
         } catch (err) {
