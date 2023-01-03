@@ -8,13 +8,13 @@ module.exports = (req, res, next) => {
     if (!cookie) {
         return res
             .status(401)
-            .send({ errorMessage: '로그인 후 이용 가능합니다' });
+            .send({ errorMessage: '로그인 후 이용 가능합니다!' });
     }
     // authType: user , authToken: 토큰 값
     const [authType, authToken] = cookie.split('=');
     if (!authToken || authType !== 'user') {
         res.status(401).send({
-            errorMessage: '로그인 후 이용 가능합니다',
+            errorMessage: '로그인 후 이용 가능합니다!!',
         });
         return;
     }
