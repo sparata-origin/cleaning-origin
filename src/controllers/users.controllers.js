@@ -11,6 +11,8 @@ class UsersController {
             const { email, nickname, confirm, phone, isBusiness } = req.body;
             let { password } = req.body;
 
+            console.log(req.body)
+
             const passwordCheck = await this.usersVerify.checkPassword(
                 password,
                 confirm
