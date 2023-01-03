@@ -20,7 +20,7 @@ class StatusRepository {
   existStatus = async (serviceId) => {
     const existStatusData = await Services.findOne({
       where : { id : serviceId },
-      attribures : ['id','status','customerId','businessId']
+      // attributes : ['id','status','customerId','businessId']
     })
     return existStatusData
   }
@@ -29,6 +29,21 @@ class StatusRepository {
    const existStatusData =  await existStatus.save();
 
    return existStatusData
+  }
+
+  userPoint = async (id) => {
+    const userPoint = await Users.findOne({ 
+      where : {id : id},
+      attributes : ['id','point']
+    })
+
+    return userPoint
+  }
+
+  PointTradingUpdate = async (user) => {
+    const userPointUpdate = user.save();
+
+    return userPointUpdate
   }
 }
 

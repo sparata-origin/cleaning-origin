@@ -32,6 +32,8 @@ class StatusService {
           existStatus.status = "청소중"
           existStatus.businessId = businessId
           await this.statusRepository.existStatusUpdate(existStatus)
+          await this.pointTrading(existStatus.customerId,businessId)
+          
           return { message : "청소 대행을 수락하였습니다."}
         }
         if (existStatus.status === "청소중") {
@@ -44,10 +46,22 @@ class StatusService {
         }
 
         return { message : "리뷰를 기다리세요" }
-      } catch {
+      } catch (err){
+        console.log(err)
         return { errorMessage : "예상하지 못한 오류가 발생했습니다."}
       }
       
+    }
+
+    pointTrading = async (customerId,businessId) => {
+      const customerPoint = await this.statusRepository.userPoint(customerId)
+      const businessPoint = await this.statusRepository.userPoint(businessId)
+
+      customerPoint.point -= 200000;
+      businessPoint.point += 200000;
+
+      await this.statusRepository.PointTradingUpdate(customerPoint);
+      await this.statusRepository.PointTradingUpdate(businessPoint);
     }
 
 }
