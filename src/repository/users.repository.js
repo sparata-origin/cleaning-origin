@@ -18,7 +18,7 @@ class UsersRepository {
                 password,
                 nickname,
                 phone,
-                point: 500,
+                point: 1000000,
                 isBusiness,
             });
             return createUserData;
