@@ -7,9 +7,15 @@ const ServicesController = require('../controllers/services.controllers');
 const servicesController = new ServicesController();
 const authMiddleware = require('../middleware/auth.middleware');
 
+try {
+    fs.readdirSync('views/uploads');
+} catch (error) {
+    console.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
+    fs.mkdirSync('views/uploads');
+}
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'src/uploads'); // 파일 저장 경로
+        cb(null, 'views/uploads'); // 파일 저장 경로
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
