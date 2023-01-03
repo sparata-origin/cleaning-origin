@@ -3,27 +3,27 @@ class ServicesRepository {
     this.servicesModel = ServicesModel;
   }
 
-  findAll = async () => {
+  findAllService = async () => {
     const services = await this.servicesModel.findAll();
     return services;
   };
 
-  findById = async (id) => {
+  findServiceById = async (id) => {
     const service = await this.servicesModel.findByPk(id);
     return service;
   };
 
-  findOne = async (findoption) => {
+  findService = async (findoption) => {
     const service = await this.servicesModel.findOne(findoption);
     return service;
   }
 
-  create = async (userId, address, homeImage) => {
+  createService = async (userId, address, homeImage) => {
     const created = await this.servicesModel.create();
     return created;
   };
 
-  update = async (id, updateData) => {
+  updateService = async (id, updateData) => {
     const updated = await this.servicesModel.update(updateData, {
       where: { id },
     });
@@ -31,7 +31,7 @@ class ServicesRepository {
     return updated;
   };
 
-  destroy = async (id) => {
+  destroyService = async (id) => {
     const destroyed = await this.servicesModel.destroy({
       where: { id },
     });
