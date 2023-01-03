@@ -9,7 +9,7 @@ const authMiddleware = require('../middleware/auth.middleware');
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'src/uploads'); // 파일 저장 경로
+        cb(null, 'views/uploads'); // 파일 저장 경로
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
