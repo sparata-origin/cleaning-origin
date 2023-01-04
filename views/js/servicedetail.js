@@ -1,24 +1,23 @@
-let query = window.location.search; 
-let param = new URLSearchParams(query); 
+let query = window.location.search;
+let param = new URLSearchParams(query);
 let id = param.get('id');
 
 $(document).ready(function () {
-  showServiceDetail(id);
-})
+    showServiceDetail(id);
+});
 
 function showServiceDetail(id) {
-  $.ajax({
-    type: 'GET',
-    url: `/api/services/${id}`,
-    data: {},
-    success: function (response) {
-      let id = response.data.id
-      let status = response.data.status
-      let address = response.data.address
-      let homeImage = response.data.homeImage
+    $.ajax({
+        type: 'GET',
+        url: `/api/services/${id}`,
+        data: {},
+        success: function (response) {
+            let id = response.data.id;
+            let status = response.data.status;
+            let address = response.data.address;
+            let homeImage = response.data.homeImage;
 
-
-      let temp_html = `<div class="col-sm-5">
+            let temp_html = `<div class="col-sm-5">
                         <div class="view-product">
                           <img src="/uploads/${homeImage}" alt="" />
                         </div>
@@ -33,10 +32,12 @@ function showServiceDetail(id) {
                               <i class="fa fa-shopping-cart"></i>
                               수주하기
                             </button>
+                            <button type="button" class="btn btn-default" onclick="location.href = '/serviceUpdate?id=${id}'">수정하기</button>
+                            <button type="button" class="btn btn-default" onclick="deleteService()">삭제하기</button>
+                        </button>
                           </span>
-                        </div>`
-      $('.product-details').append(temp_html)
-    
-    },
-  });
+                        </div>`;
+            $('.product-details').append(temp_html);
+        },
+    });
 }
