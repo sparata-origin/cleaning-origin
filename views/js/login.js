@@ -1,10 +1,14 @@
 $(document).ready(function () {
-    const todoForm = document.getElementById("re")
-    todoForm.addEventListener("submit", handleToDoSubmit)
+    const todoForm = document.querySelectorAll('#re');
+    todoForm.forEach((form) => {
+        form.addEventListener('submit', handleToDoSubmit);
+    });
+    // todoForm.addEventListener('submit', handleToDoSubmit);
     function handleToDoSubmit(event) {
         event.preventDefault();
     }
 });
+
 function login() {
     const email = $('#email').val();
     const password = $('#password').val();
