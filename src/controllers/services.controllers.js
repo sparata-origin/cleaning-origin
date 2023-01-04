@@ -24,11 +24,17 @@ class ServicesController {
                     errorMessage: '사진울 등록해주세요',
                 });
             }
-            await this.servicesService.requestServices(
-                customerId,
-                address,
-                homeImage
-            );
+            const requestServiceData =
+                await this.servicesService.requestServices(
+                    customerId,
+                    address,
+                    homeImage
+                );
+            if (requestServiceData.errorMessage) {
+                return res.status(412).json({
+                    errorMessage: requestServiceData.errorMessage,
+                });
+            }
             return res.status(201).json({
                 message: '청소 신청이 완료되었습니다.',
             });
