@@ -17,12 +17,10 @@ function login() {
             password: password,
         },
         success: function (response) {
-            console.log(response)
             alert(response.message);
             window.location.href = '/index';
         },
         error: function (response) {
-            console.log(response);
             alert(response.responseJSON.errorMessage);
         },
     });
