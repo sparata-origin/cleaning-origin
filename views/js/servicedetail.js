@@ -20,7 +20,7 @@ function showServiceDetail(id) {
 
       let temp_html = `<div class="col-sm-5">
                         <div class="view-product">
-                          <img src="/img/cleaning.jpg" alt="" />
+                          <img src="/uploads/${homeImage}" alt="" />
                         </div>
                       </div>
                       <div class="col-sm-7">

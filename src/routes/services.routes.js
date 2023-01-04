@@ -7,16 +7,16 @@ const ServicesController = require('../controllers/services.controllers');
 const servicesController = new ServicesController();
 const authMiddleware = require('../middleware/auth.middleware');
 
-try {
-    fs.readdirSync('./views/uploads'); // 폴더 확인
-} catch (err) {
-    console.error('uploads 폴더가 없습니다. 폴더를 생성합니다.');
-    fs.mkdirSync('./views/uploads'); // 폴더 생성
-}
+// try {
+//     fs.readdirSync('./views/uploads'); // 폴더 확인
+// } catch (err) {
+//     console.error('uploads 폴더가 없습니다. 폴더를 생성합니다.');
+//     fs.mkdirSync('./views/uploads'); // 폴더 생성
+// }
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './views/uploads'); // 파일 저장 경로
+        cb(null, '../views/uploads'); // 파일 저장 경로
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);

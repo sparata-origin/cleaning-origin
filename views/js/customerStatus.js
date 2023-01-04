@@ -9,6 +9,7 @@ function showStatusList() {
     data: {},
     success: function (response) {
       let rows = response.myStatusData
+      console.log(response)
       for(let i = 0; i < rows.length; i++){
         let id = rows[i]['id']
         let status = rows[i]['status']
@@ -19,7 +20,7 @@ function showStatusList() {
         if (status === "대기중" || status === "청소중") {
           let temp_html = `<tr>
                           <td class="cart_product">
-                            <a href=""><img src="img/cleaning.jpg" alt=""></a>
+                            <a href="/services?id=${id}"><img src="/uploads/${homeImage}" alt="" style="width:100px; height:100px;"></a>
                           </td>
                           <td class="cart_description">
                             <h4><a href="">${address}</a></h4>
@@ -40,7 +41,7 @@ function showStatusList() {
         if (status === "청소완료") {
           let temp_html = `<tr>
                           <td class="cart_product">
-                            <a href=""><img src="img/cleaning.jpg" alt=""></a>
+                          <a href="/services?id=${id}"><img src="/uploads/${homeImage}" alt="" style="width:100px; height:100px;"></a>
                           </td>
                           <td class="cart_description">
                             <h4><a href="">${address}</a></h4>

@@ -11,7 +11,7 @@ class ServicesService {
         if (pointCheck.point <= 199999) {
             return { errorMessage: '포인트가 부족합니다.' };
         }
-        pointCheck.point -= 2000000;
+        pointCheck.point -= 200000;
         await this.statusRepository.PointTradingUpdate(pointCheck);
         const createServiceData = await this.servicesRepository.createService(
             customerId,

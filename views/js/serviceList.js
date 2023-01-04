@@ -21,7 +21,7 @@ function showServiceList() {
                           <div class="product-image-wrapper">
                             <div class="single-products">
                               <div class="productinfo text-center">
-                                <img src="img/default.jpg" alt="" />
+                                <img src="/uploads/${homeImage}" alt="" id="servicelist"/>
                                 <h2>200000 Point</h2>
                                 <p>${status}</p>
                               </div>
