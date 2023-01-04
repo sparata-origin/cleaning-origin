@@ -11,7 +11,6 @@ class UsersController {
             const { email, nickname, confirm, phone, isBusiness } = req.body;
             let { password } = req.body;
 
-
             const passwordCheck = await this.usersVerify.checkPassword(
                 password,
                 confirm
@@ -50,10 +49,13 @@ class UsersController {
                     errorMessage: createUserData.errorMessage,
                 });
             }
-            return res.status(201).json({ data: createUserData });
+            return res.status(201).json({
+                // data: createUserData,
+                message: '회원가입이 완료되었습니다',
+            });
         } catch (err) {
             return res
-                .stauts(500)
+                .status(500)
                 .json({ errorMessage: '예상하지 못한 문제가 발생했습니다.' });
         }
     };
@@ -80,7 +82,7 @@ class UsersController {
                     httpOnly: true,
                 });
                 res.status(201).json({
-                    message: '로그인 완료'
+                    message: '로그인 완료',
                 });
             }
         } catch (err) {
