@@ -29,6 +29,7 @@ function showServiceList() {
                                 <div class="overlay-content">
                                   <p>${address}</p>
                                   <button type="button" class="btn btn-info" onclick="receiveOrder(${id})">수주하기</button>
+                                  <button type="button" class="btn btn-info" onclick="location.href = '/services?id=${id}'">상세보기</button>
                                 </div>
                               </div>
                             </div>

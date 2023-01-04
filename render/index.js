@@ -31,4 +31,11 @@ router.get('/login', (req, res) => {
   res.render('login.ejs')
 })
 
+router.get('/services',logincheck, (req,res) => {
+  if(res.locals.user){
+    res.render('servicedetail.ejs',{ login : true})
+  }
+  res.render('servicedetail.ejs', {login : false})
+})
+
 module.exports = router;

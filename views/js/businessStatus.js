@@ -54,7 +54,7 @@ function showStatusList() {
                             </div>
                           </td>
                           <td class="cart_total">
-                            <button type="button" class="btn btn-warning" onclick="receiveOrder(${id})">청소 완료</button>
+                            <button type="button" class="btn btn-warning" onclick="serviceUpdate(${id})">청소 완료</button>
                           </td>
                         </tr>`
             $('#statusList').append(temp_html)

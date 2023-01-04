@@ -30,7 +30,13 @@ class StatusRepository {
 
    return existStatusData
   }
-
+  existService = async (businessId) => {
+    const existService = await Services.findAll({
+      where : { businessId : businessId },
+      attributes : ['status']
+    })
+    return existService
+  }
   userPoint = async (id) => {
     const userPoint = await Users.findOne({ 
       where : {id : id},

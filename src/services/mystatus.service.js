@@ -18,27 +18,44 @@ class StatusService {
         return false
       }
     }
-
-    existStatus = async (serviceId,businessId,isBusiness) => {
-
+    receiveOrder = async (serviceId,businessId,isBusiness) => {
       try {
-        const existStatus = await this.statusRepository.existStatus(serviceId)
+        const existService = await this.statusRepository.existService(businessId)
+        const existServiceList = await existService.filter((data)=> data.status === "청소중")
+        if (existServiceList.length >= 1) {
+          return { errorMessage : "한 번에 한 개의 의뢰만 진행할 수 있습니다."}
+        }
 
         if (!isBusiness) {
           return { errorMessage : "업체만 이용 가능합니다." }
         }
-  
+        const existStatus = await this.statusRepository.existStatus(serviceId)
+        if (existStatus.status === "청소중") {
+          if (existStatus.businessId !== businessId) {
+            return { errorMessage : "다른 업체에서 진행중입니다." }
+          }
+        }
         if (existStatus.status === "대기중") {
           existStatus.status = "청소중"
           existStatus.businessId = businessId
-          const existPoint = await this.pointTrading(existStatus.customerId,businessId)
-          if (!existPoint) {
-            return { errorMessage : "신청자의 포인트가 부족합니다"}
-          }
           await this.statusRepository.existStatusUpdate(existStatus)
-          
-          
           return { message : "청소 대행을 수락하였습니다."}
+        }
+
+      } catch (err){
+        return { errorMessage : "예상하지 못한 오류가 발생했습니다."}
+      }
+      
+    }
+
+    existStatus = async (serviceId,businessId) => {
+
+      try {
+        const existStatus = await this.statusRepository.existStatus(serviceId)
+        
+        const existPoint = await this.pointTrading(existStatus.customerId,businessId)
+        if (!existPoint) {
+          return { errorMessage : "신청자의 포인트가 부족합니다"}
         }
         if (existStatus.status === "청소중") {
           if (existStatus.businessId !== businessId) {

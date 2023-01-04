@@ -21,9 +21,22 @@ class StatusController {
     serviceStatusUpdate = async (req, res) => {
       const { serviceId } = req.params;
       const businessId = res.locals.user.id
+
+      const existStatus = await this.statusService.existStatus(serviceId, businessId)
+      if (existStatus.errorMessage) {
+        return res.status(existStatus.code ? existStatus.code : 409).json({ errorMessage : existStatus.errorMessage })
+      }
+      if (existStatus.message) {
+        return res.json({message : existStatus.message})
+      }
+    }
+
+    receiveOrder = async (req, res) => {
+      const { serviceId } = req.params;
+      const businessId = res.locals.user.id
       const isBusiness = res.locals.user.isBusiness
 
-      const existStatus = await this.statusService.existStatus(serviceId, businessId,isBusiness)
+      const existStatus = await this.statusService.receiveOrder(serviceId, businessId,isBusiness)
       if (existStatus.errorMessage) {
         return res.status(existStatus.code ? existStatus.code : 409).json({ errorMessage : existStatus.errorMessage })
       }
