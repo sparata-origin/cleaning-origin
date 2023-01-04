@@ -1,10 +1,18 @@
 const ServicesRepository = require('../repository/services.repository');
 const { Services: ServicesModel } = require('../../sequelize/models');
+const StatusRepository = require('../repository/mystatus.repository');
 
 class ServicesService {
     servicesRepository = new ServicesRepository(ServicesModel);
+    statusRepository = new StatusRepository();
 
     requestServices = async (customerId, address, homeImage) => {
+        const pointCheck = await this.statusRepository.userPoint(customerId);
+        if (pointCheck.point <= 199999 ){
+            return { errorMessage : "포인트가 부족합니다." }
+        }
+        pointCheck.point -= 2000000
+        await this.statusRepository.PointTradingUpdate(pointCheck)
         const createServiceData = await this.servicesRepository.createService(
             customerId,
             address,

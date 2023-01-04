@@ -53,10 +53,8 @@ class StatusService {
       try {
         const existStatus = await this.statusRepository.existStatus(serviceId)
         
-        const existPoint = await this.pointTrading(existStatus.customerId,businessId)
-        if (!existPoint) {
-          return { errorMessage : "신청자의 포인트가 부족합니다"}
-        }
+        await this.pointTrading(businessId)
+        
         if (existStatus.status === "청소중") {
           if (existStatus.businessId !== businessId) {
             return { errorMessage : "다른 업체에서 진행중입니다." }
@@ -74,18 +72,12 @@ class StatusService {
       
     }
 
-    pointTrading = async (customerId,businessId) => {
-      const customerPoint = await this.statusRepository.userPoint(customerId)
+    pointTrading = async (businessId) => {
       const businessPoint = await this.statusRepository.userPoint(businessId)
-      if (customerPoint.point <= 199999){
-        return false
-      }
-      customerPoint.point -= 200000;
+         
       businessPoint.point += 200000;
 
-      await this.statusRepository.PointTradingUpdate(customerPoint);
       await this.statusRepository.PointTradingUpdate(businessPoint);
-
       return true
     }
 
