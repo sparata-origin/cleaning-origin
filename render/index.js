@@ -56,4 +56,11 @@ router.get('/business/review', logincheck, (req, res) => {
   }
 })
 
+router.get('/business/info', logincheck, (req, res) => {
+    if (res.locals.user) {
+        res.render('businessInfo.ejs', { login: true });
+    }
+    res.render('businessInfo.ejs', { login: false });
+});
+
 module.exports = router;

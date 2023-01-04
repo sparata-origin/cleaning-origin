@@ -22,7 +22,7 @@ function showStatusList() {
                           <a href="/services?id=${id}"><img src="/uploads/${homeImage}" alt="" style="width:100px; height:100px;"></a>
                           </td>
                           <td class="cart_description">
-                            <h4><a href="">${address}</a></h4>
+                            <h4><a href="/services?id=${id}">${address}</a></h4>
                           </td>
                           <td class="cart_price">
                             <p>200000 Point</p>
@@ -43,7 +43,7 @@ function showStatusList() {
                           <a href="/services?id=${id}"><img src="/uploads/${homeImage}" alt="" style="width:100px; height:100px;"></a>
                           </td>
                           <td class="cart_description">
-                            <h4><a href="">${address}</a></h4>
+                            <h4><a href="/services?id=${id}">${address}</a></h4>
                           </td>
                           <td class="cart_price">
                             <p>200000 Point</p>
