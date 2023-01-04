@@ -33,6 +33,7 @@ function showServiceDetail(id) {
                               수주하기
                             </button>
                             <button type="button" class="btn btn-default" onclick="location.href = '/serviceUpdate?id=${id}'">수정하기</button>
+                            <button type="button" class="btn btn-default" onclick="deleteService()">삭제하기</button>
                         </button>
                           </span>
                         </div>`;

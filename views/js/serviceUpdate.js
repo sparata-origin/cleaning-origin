@@ -21,7 +21,6 @@ function update() {
     let query = window.location.search;
     let param = new URLSearchParams(query);
     let id = param.get('id');
-    console.log('??:', id);
     let homeImage = $('input[name=homeImage]')[0].files[0];
     let address = $('input[name=address]').val();
     let formData = new FormData();
