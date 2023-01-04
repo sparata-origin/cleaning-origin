@@ -63,4 +63,11 @@ router.get('/business/info', logincheck, (req, res) => {
     res.render('businessInfo.ejs', { login: false });
 });
 
+router.get('/test', logincheck, (req, res) => {
+    if (res.locals.user) {
+        res.render('test.ejs', { login: true });
+    }
+    res.render('test.ejs', { login: false });
+});
+
 module.exports = router;

@@ -11,8 +11,9 @@
     <link href="/css/prettyPhoto.css" rel="stylesheet">
     <link href="/css/price-range.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
-	<link href="/css/main.css" rel="stylesheet">
-	<link href="/css/responsive.css" rel="stylesheet">
+		<link href="/css/main.css" rel="stylesheet">
+		<link href="/css/responsive.css" rel="stylesheet">
+		<link href="/css/businessInfo.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>/
     <script src="js/respond.min.js"></script>
@@ -36,19 +37,23 @@
     	<div class="bg">
 	    	<div class="row">    		
 	    		<div class="col-sm-12">    			   			
-					<h2 class="title text-center"><strong>Company Info</strong></h2>    			    				    				
+					<h2 class="title text-center"><strong>Company Review</strong></h2>    			    				    				
 				</div>			 		
 			</div>    	
     		<div class="row">  	
 	    		<div class="col-sm-8">
-						ㅇㄴㅁㅇㅁㄴ
+						<div class="response-area">
+							<h2>Reviews</h2>
+							<ul class="media-list">
+							</ul>					
+						</div><!--/Response-area-->
 	    		</div>
 	    		<div class="col-sm-4">
 	    			<div class="contact-info">
 	    				<h2 class="title text-center">Company Info</h2>
 	    				<address>
-							<p>업체명 : 청소의 원조</p>
-							<p>평점 : 2.5</p>
+							<p id="CompanyName"></p>
+							<p id="starAVG"></p>
 							<p>전화 : 010 2234 2243</p>
 	    				</address>
 	    				<div class="social-networks">
@@ -85,5 +90,6 @@
     <script src="/js/jquery.scrollUp.min.js"></script>
     <script src="/js/jquery.prettyPhoto.js"></script>
     <script src="/js/main.js"></script>
+		<script src="/js/businessInfo.js"></script>
 </body>
 </html>
