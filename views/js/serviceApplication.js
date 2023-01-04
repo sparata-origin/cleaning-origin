@@ -1,3 +1,4 @@
+// 사진 미리보기
 function readURL(input) {
     if (input.files && input.files[0]) {
         const reader = new FileReader();
@@ -38,17 +39,5 @@ function apply() {
         error: function (response) {
             alert(response.responseJSON.errorMessage);
         },
-        // error: function (request, status, error) {
-        //     alert(
-        //         'code:' +
-        //             request.status +
-        //             '\n' +
-        //             'message:' +
-        //             request.responseText +
-        //             '\n' +
-        //             'error:' +
-        //             error
-        //     );
-        // },
     });
 }
