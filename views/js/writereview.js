@@ -11,7 +11,7 @@ function writereview() {
     url: `/api/business/${businessId}/reviews/${serviceId}`,
     data: { content : reviewContent , star : star },
     success: function (response) {
-      console.log(response);
+      alert(response.message)
       location.href = '/';
     },
   });

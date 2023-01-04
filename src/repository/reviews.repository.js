@@ -54,6 +54,10 @@ class ReviewRepository {
         });
         return reviewStar;
     };
+
+    serviceStatus = async (serviceStatus) => {
+        serviceStatus.save();
+    }
 }
 
 module.exports = ReviewRepository;
