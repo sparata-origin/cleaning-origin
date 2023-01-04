@@ -37,11 +37,23 @@ router.get('/services', logincheck, (req, res) => {
     res.render('servicedetail.ejs', { login: false });
 });
 
+
 router.get('/serviceApplication', logincheck, (req, res) => {
     if (res.locals.user) {
         res.render('serviceApplication.ejs', { login: true });
     }
     res.render('serviceApplication.ejs', { login: false });
 });
+
+
+router.get('/business/review', logincheck, (req, res) => {
+  if (res.locals.user){
+    res.render('writereview.ejs', { login : true})
+  } else if (!res.locals.user) {
+    res.render('writereview.ejs', {login : false})
+  } else {
+    res.render('404.ejs')
+  }
+})
 
 module.exports = router;

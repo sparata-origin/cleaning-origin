@@ -30,6 +30,9 @@ class ReviewService {
                 content,
                 star
             );
+            const serviceStatus = await this.reviewsRepository.searchService(serviceId)
+            serviceStatus.status = "리뷰 작성 완료"
+            await this.reviewsRepository.serviceStatus(serviceStatus)
             return createReviewData;
         } catch (err) {
             console.log(err);

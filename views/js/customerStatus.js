@@ -9,12 +9,12 @@ function showStatusList() {
     data: {},
     success: function (response) {
       let rows = response.myStatusData
-      
       for(let i = 0; i < rows.length; i++){
         let id = rows[i]['id']
         let status = rows[i]['status']
         let address = rows[i]['address']
         let homeImage = rows[i]['homeImage']
+        let businessId = rows[i]['businessId']
 
         if (status === "대기중" || status === "청소중") {
           let temp_html = `<tr>
@@ -54,7 +54,7 @@ function showStatusList() {
                             </div>
                           </td>
                           <td class="cart_total">
-                            <button type="button" class="btn btn-warning" onclick="receiveOrder(${id})">리뷰 작성</button>
+                            <button type="button" class="btn btn-warning" onclick="location.href = '/business/review?serviceId=${id}&businessId=${businessId}'">리뷰 작성</button>
                           </td>
                         </tr>`
             $('#statusList').append(temp_html)
@@ -63,3 +63,6 @@ function showStatusList() {
     },
   });
 }
+
+//onclick="location.href = '/services?id=${id}'"
+//onclick="writereview(${id},${businessId})"

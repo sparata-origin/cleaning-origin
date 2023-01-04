@@ -14,16 +14,32 @@ class UsersService {
             if (existUser) {
                 return false;
             }
+            if (isBusiness == 1) {
+                const point = 0
+                const createUserData = await this.usersRepository.userRegister(
+                    email,
+                    password,
+                    nickname,
+                    phone,
+                    point,
+                    isBusiness  
+                );
+                return createUserData;
+            }
+            if(isBusiness == 0) {
+                const point = 1000000
+                const createUserData = await this.usersRepository.userRegister(
+                    email,
+                    password,
+                    nickname,
+                    phone,
+                    point,
+                    isBusiness  
+                );
+                return createUserData;
+            }
 
-            const createUserData = await this.usersRepository.userRegister(
-                email,
-                password,
-                nickname,
-                phone,
-                isBusiness
-            );
-
-            return createUserData;
+            
         } catch {
             return { errorMessage: '예상하지 못한 문제가 발생했습니다.' };
         }
