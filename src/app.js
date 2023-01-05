@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const { sequelize } = require('../sequelize/models');
 const app = express();
-const port = 3000;
+const { Server } = require("http");
 
 const router = require('./routes');
 const render = require('../render');
@@ -29,3 +29,5 @@ sequelize
 app.listen(port, () => {
     console.log(port, '원조집 OPEN');
 });
+
+module.exports = http;
