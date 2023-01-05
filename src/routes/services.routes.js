@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const ServicesController = require('../controllers/services.controllers');
 const servicesController = new ServicesController();
-const authMiddleware = require('../middleware/auth.middleware');
 const multerUpload = require('../middleware/multer');
+const authMiddleware = require('../middleware/auth.middleware');
 
 // 청소 서비스 신청(고객) API
 router.post(
