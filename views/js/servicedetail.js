@@ -27,14 +27,19 @@ function showServiceDetail(id) {
                           <h2>${address}</h2>
                           <p>${status}</p>
                           <span>
-                            <span>200000 Point</span>
-                            <button type="button" class="btn btn-fefault cart" onclick="receiveOrder(${id})">
-                              <i class="fa fa-shopping-cart"></i>
-                              수주하기
-                            </button>
-                            <button type="button" class="btn btn-default" onclick="location.href = '/serviceUpdate?id=${id}'">수정하기</button>
-                            <button type="button" class="btn btn-default" onclick="deleteService()">삭제하기</button>
-                        </button>
+                          <span>200000 Point</span>
+                          <button type="button" class="btn btn-fefault cart" onclick="deleteService()">
+                          <i class="fa-solid fa-hands-bubbles"></i>
+                          삭제하기
+                          </button>
+                          <button type="button" class="btn btn-fefault cart" onclick="location.href = '/serviceUpdate?id=${id}'">
+                          <i class="fa-solid fa-hands-bubbles"></i>
+                          수정하기
+                          </button>
+                          <button type="button" class="btn btn-fefault cart" onclick="receiveOrder(${id})">
+                          <i class="fa-solid fa-hands-bubbles"></i>
+                          수주하기
+                          </button>
                           </span>
                         </div>`;
             $('.product-details').append(temp_html);

@@ -27,8 +27,6 @@ function businessReviews(id) {
       let content = rows[i].content
       let star = rows[i].star
       
-      
-      console.log(rows[i])
       let temp_html = `<li class="media">
                           <div class="media-body">
                             <ul class="sinlge-post-meta">

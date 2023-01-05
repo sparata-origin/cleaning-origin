@@ -5,7 +5,7 @@ function receiveOrder(id){
       data: {},
       success: function (response) {
         alert(response.message)
-        window.location.reload()
+        window.location.replace("/status")
       },
       error: function (request, status, error) {
         alert(request.responseJSON.errorMessage)
