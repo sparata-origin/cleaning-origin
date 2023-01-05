@@ -56,7 +56,7 @@ class ServicesController {
         try {
             const { serviceId } = req.params;
             const { address } = req.body;
-            const homeImage = req.file.filename;
+            const homeImage = req.file;
             const customerId = res.locals.user.id;
             const isBusiness = res.locals.user.isBusiness;
             if (isBusiness) {
@@ -64,21 +64,28 @@ class ServicesController {
                     errorMessage: '고객만이 가능한 요청입니다.',
                 });
             }
-            if (!address) {
-                return res.status(412).json({
-                    errorMessage: '주소를 입력해주세요',
-                });
-            }
             if (!homeImage) {
                 return res.status(412).json({
                     errorMessage: '사진울 등록해주세요',
+                });
+            }
+            const lastDot = homeImage.filename.lastIndexOf('.');
+            const ext = homeImage.filename.substring(lastDot, homeImage.length);
+            if (!ext.match(/\.(jpg|jpeg|png|gif)$/)) {
+                return res.status(412).json({
+                    errorMessage: '이미지 파일만 가능합니다',
+                });
+            }
+            if (!address) {
+                return res.status(412).json({
+                    errorMessage: '주소를 입력해주세요',
                 });
             }
             const putServiceData = await this.servicesService.putServices(
                 serviceId,
                 customerId,
                 address,
-                homeImage
+                homeImage.filename
             );
             if (putServiceData.errorMessage) {
                 return res
