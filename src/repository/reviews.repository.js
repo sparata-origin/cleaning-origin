@@ -54,6 +54,21 @@ class ReviewRepository {
         });
         return reviewStar;
     };
+
+    findBusinessStar = async (businessId) => {
+        const reviewStar = await Reviews.findAll({
+            where: { businessId : businessId },
+            attributes: [
+                [sequelize.fn('AVG', sequelize.col('star')), 'starAVG'],
+                'businessId',
+            ],
+        });
+        return reviewStar;
+    };
+
+    serviceStatus = async (serviceStatus) => {
+        serviceStatus.save();
+    }
 }
 
 module.exports = ReviewRepository;

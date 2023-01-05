@@ -5,6 +5,8 @@ class ReviewController {
     writeReview = async (req, res, next) => {
         try {
             const { content, star } = req.body;
+
+            console.log(req.body)
             if (!content) {
                 return res.status(412).json({
                     errorMessage: '내용을 입력해주세요',

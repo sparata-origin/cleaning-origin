@@ -5,7 +5,9 @@ class ServicesRepository {
     }
 
     findAllService = async () => {
-        const services = await this.servicesModel.findAll();
+        const services = await this.servicesModel.findAll({
+            where : { status : "대기중"}
+        });
         return services;
     };
 
