@@ -44,6 +44,9 @@ class ServicesService {
     };
 
     deleteServices = async (serviceId, customerId) => {
+        const pointCheck = await this.statusRepository.userPoint(customerId);
+        pointCheck.point += 200000;
+        await this.statusRepository.PointTradingUpdate(pointCheck);
         const existService = await this.servicesRepository.findServiceById(
             serviceId
         );
