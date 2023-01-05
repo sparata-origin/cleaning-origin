@@ -29,11 +29,11 @@ function showServiceDetail(id) {
                           <span>
                           <span>200000 Point</span>
                           <button type="button" class="btn btn-fefault cart" onclick="deleteService()">
-                          <i class="fa-solid fa-hands-bubbles"></i>
+                          <i class="fa-sharp fa-solid fa-trash"></i>
                           삭제하기
                           </button>
                           <button type="button" class="btn btn-fefault cart" onclick="location.href = '/serviceUpdate?id=${id}'">
-                          <i class="fa-solid fa-hands-bubbles"></i>
+                          <i class="fa-solid fa-pen"></i>
                           수정하기
                           </button>
                           <button type="button" class="btn btn-fefault cart" onclick="receiveOrder(${id})">
