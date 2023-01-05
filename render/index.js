@@ -75,4 +75,11 @@ router.get('/business/list', logincheck, (req, res) => {
     res.render('businessList.ejs', { login: false });
 });
 
+router.get('/chat', logincheck,(req, res) => {
+    if (res.locals.user) {
+        res.render('chat.ejs', { login: true });
+    }
+    res.render('chat.ejs', { login: false });
+});
+
 module.exports = router;

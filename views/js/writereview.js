@@ -12,7 +12,7 @@ function writereview() {
     data: { content : reviewContent , star : star },
     success: function (response) {
       alert(response.message)
-      location.href = '/';
+      location.href = `/business/info?id=${businessId}`;
     },
   });
 } 
