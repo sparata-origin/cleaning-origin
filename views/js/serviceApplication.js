@@ -18,10 +18,9 @@ function cancel() {
 
 function apply() {
     let homeImage = $('input[name=homeImage]')[0].files[0];
+    console.log('######', homeImage);
     let address = $('input[name=address]').val();
     let formData = new FormData();
-    console.log(homeImage, address);
-    console.log(formData);
     formData.append('homeImage', homeImage);
     formData.append('address', address);
 

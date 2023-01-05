@@ -14,14 +14,21 @@ class ServicesController {
                     errorMessage: '고객만이 가능한 요청입니다.',
                 });
             }
-            if (!address) {
-                return res.status(412).json({
-                    errorMessage: '주소를 입력해주세요',
-                });
-            }
             if (!homeImage) {
                 return res.status(412).json({
                     errorMessage: '사진울 등록해주세요',
+                });
+            }
+            const lastDot = homeImage.lastIndexOf('.');
+            const ext = homeImage.substring(lastDot, homeImage.length);
+            if (!ext.match(/\.(jpg|jpeg|png|gif)$/)) {
+                return res.status(412).json({
+                    errorMessage: '이미지 파일만 가능합니다',
+                });
+            }
+            if (!address) {
+                return res.status(412).json({
+                    errorMessage: '주소를 입력해주세요',
                 });
             }
             const requestServiceData =
