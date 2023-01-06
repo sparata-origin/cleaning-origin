@@ -14,8 +14,8 @@ router.post('/auth/login', usersController.login);
 // 로그아웃 API
 router.get('/auth/logout', usersController.logout);
 
-// 로그인 검증 test
-router.get('/auth/test', authMiddleware, async (req, res) => {
+// 내 정보 보기
+router.get('/auth/info', authMiddleware, async (req, res) => {
     res.json({ user: res.locals.user });
 });
 
