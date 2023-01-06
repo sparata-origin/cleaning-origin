@@ -52,7 +52,7 @@
 박진 - [블로그 링크](https://5kiran.tistory.com/38)  
 오길환- [블로그 링크](https://5kiran.tistory.com/38)   
 김승일 - [블로그 링크](https://5kiran.tistory.com/38)  
-정성욱 - [블로그 링크](https://velog.io/@squirrelswj](https://github.com/squirrelSWJ)   
+정성욱 - [블로그 링크](https://velog.io/@squirrelswj)  
 정대신 - [블로그 링크](https://5kiran.tistory.com/38)
 
 # 시연 영상
