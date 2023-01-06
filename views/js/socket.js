@@ -1,17 +1,17 @@
 const socket = io.connect("/");
 
-var chatWindow = document.getElementById('chatWindow');
-var sendButton = document.getElementById('chatMessageSendBtn');
-var chatInput = document.getElementById('chatInput');
+let chatWindow = document.getElementById('chatWindow');
+let sendButton = document.getElementById('chatMessageSendBtn');
+let chatInput = document.getElementById('chatInput');
 
 socket.on('connect', function(){
-    var name = prompt('대화명을 입력해주세요.', '');
+    let name = prompt('대화명을 입력해주세요.', '');
     socket.emit('newUserConnect', name);
 });
 
 socket.on('updateMessage', function(data){
     if(data.name === 'SERVER'){
-        var info = document.getElementById('info');
+        let info = document.getElementById('info');
         info.innerHTML = data.message;
 
         setTimeout(() => {
@@ -19,7 +19,7 @@ socket.on('updateMessage', function(data){
         }, 1000);
 
     }else{
-        var chatMessageEl = drawChatMessage(data);
+        let chatMessageEl = drawChatMessage(data);
         chatWindow.appendChild(chatMessageEl);
 
         chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -27,7 +27,7 @@ socket.on('updateMessage', function(data){
 });
 
 sendButton.addEventListener('click', function(){
-    var message = chatInput.value;
+    let message = chatInput.value;
 
     if(!message) return false;
    
@@ -39,9 +39,9 @@ sendButton.addEventListener('click', function(){
 });
 
 function drawChatMessage(data){
-    var wrap = document.createElement('p');
-    var message = document.createElement('span');
-    var name = document.createElement('span');
+    let wrap = document.createElement('p');
+    let message = document.createElement('span');
+    let name = document.createElement('span');
 
     name.innerText = data.name;
     message.innerText = data.message;
