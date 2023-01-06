@@ -49,7 +49,7 @@
 <img src="./mkdImage/API.png" width="90%" title="필수요소.png"></img>
 
 # 프로젝트 마무리 후 회고
-박진 - [블로그 링크](https://5kiran.tistory.com/38)  
+박진 - [https://velog.io/@tstunas3](https://velog.io/@tstunas3)
 오길환- [블로그 링크](https://5kiran.tistory.com/38)   
 김승일 - [블로그 링크](https://5kiran.tistory.com/38)  
 정성욱 - [https://velog.io/@squirrelswj](https://github.com/squirrelSWJ)   
