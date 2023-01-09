@@ -56,5 +56,5 @@
 정대신 - [블로그 링크](https://5kiran.tistory.com/38)
 
 # 시연 영상
-[![내일배움캠프 팀프로젝트#3 - 청소의원 시연영상](https://i.ytimg.com/an_webp/oCauESmLxgc/mqdefault_6s.webp?du=3000&sqp=CPve3p0G&rs=AOn4CLDai7B6-sfkrNViqfeaMHjKF3TeTA
+[![내일배움캠프 팀프로젝트#3 - 청소의원조 시연영상](https://i.ytimg.com/an_webp/oCauESmLxgc/mqdefault_6s.webp?du=3000&sqp=CNug750G&rs=AOn4CLDZAnNHKV-5AdD8fDlLUZSruSCawQ
 )](https://www.youtube.com/watch?v=oCauESmLxgc) 
